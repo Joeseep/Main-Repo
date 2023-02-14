@@ -12,6 +12,9 @@
         android:theme="@style/Theme.LifeSaver"
         tools:targetApi="31">
         <activity
+            android:name=".MainPage"
+            android:exported="false" />
+        <activity
             android:name=".Recover"
             android:exported="false" />
         <activity
