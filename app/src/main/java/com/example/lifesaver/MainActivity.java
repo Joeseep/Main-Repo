@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         mForgotPasswordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Recover.class);
+                Intent intent = new Intent(getApplicationContext(), Recover.class);
                 startActivity(intent);
             }
         });

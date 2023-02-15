@@ -19,20 +19,20 @@
         android:id="@+id/email_input"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/title"
         android:layout_centerInParent="true"
         android:layout_marginTop="16dp"
-        android:layout_below="@id/title"
+        android:autofillHints=""
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        android:autofillHints="" />
+        android:minHeight="48dp" />
 
     <Button
-        android:id="@+id/send_code_button"
+        android:id="@+id/send_reset_link_button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_below="@+id/email_input"
+        android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
         android:backgroundTint="#00D100"
         android:text="Send Reset Link"
