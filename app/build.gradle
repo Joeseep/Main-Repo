@@ -43,6 +43,7 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.6.1'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
     implementation 'com.google.gms:google-services:4.3.15'
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
     implementation 'androidx.activity:activity:1.6.1'
     implementation 'com.google.firebase:firebase-storage:20.1.0'
     testImplementation 'junit:junit:4.13.2'

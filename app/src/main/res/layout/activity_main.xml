@@ -19,13 +19,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/password_input"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:autofillHints="emailAddress" />
 
-    <!-- Password Input -->
     <EditText
         android:id="@+id/password_input"
         android:layout_width="350dp"
@@ -38,20 +37,21 @@
         android:minHeight="48dp"
         android:autofillHints="" />
 
-    <!-- Login Button -->
+
     <Button
         android:id="@+id/login_button"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password_input"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#00D100"
+        android:layout_centerHorizontal="true"
         android:text="login"
         android:textColor="@color/white"
         android:textSize="20sp"
         tools:ignore="TextContrastCheck" />
-    <!-- Create Account Text -->
+
+
     <TextView
         android:id="@+id/create_account_text"
         android:layout_width="match_parent"
@@ -86,7 +86,7 @@
         android:layout_marginTop="1dp"
         android:gravity="center"
         android:text="Sign in using"
-        android:textColor="#000000"
+        android:textColor="#00D100"
         android:textSize="18sp"
         />
 
@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/sign_in"
         android:layout_centerHorizontal="false"
-        android:layout_marginStart="140dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/google"
         android:clickable="true"
@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/sign_in"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="140dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:src="@drawable/fb"
