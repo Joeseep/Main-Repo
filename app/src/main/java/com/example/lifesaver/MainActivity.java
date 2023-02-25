@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(MainActivity.this, task -> {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(MainActivity.this, MainPage.class);
+                                Intent intent = new Intent(MainActivity.this, Homepage.class);
                                 startActivity(intent);
                                 finish();
                             } else {
