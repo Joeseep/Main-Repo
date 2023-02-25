@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/title"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/appname"
         tools:ignore="ImageContrastCheck" />
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginTop="20dp"
-        android:layout_alignLeft="@id/password_input"
+        android:layout_alignStart="@id/password_input"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
@@ -90,33 +90,27 @@
         android:textSize="18sp"
         />
 
-    <!-- Google Login Button -->
-    <ImageView
+    <com.google.android.gms.common.SignInButton
         android:id="@+id/google_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/sign_in"
-        android:layout_centerHorizontal="false"
-        android:layout_marginStart="100dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:focusable="true"
         android:src="@drawable/google"
-        android:clickable="true"
-        tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck"
-        android:focusable="true" />
+         />
 
-    <!-- Facebook Login Button -->
-    <ImageView
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/facebook_login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sign_in"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="100dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:src="@drawable/fb"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/google_login_button"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
         android:clickable="true"
-        tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck"
-        android:focusable="true" />
-
+        android:focusable="true"
+        android:minHeight="100dp"
+        android:src="@drawable/fb"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 </RelativeLayout>
