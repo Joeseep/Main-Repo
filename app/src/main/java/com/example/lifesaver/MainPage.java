@@ -9,11 +9,18 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,15 +35,10 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        myDrawer = (DrawerLayout) findViewById(R.id.mainpagedrawer);
+        myDrawer = findViewById(R.id.mainpagedrawer);
         NavigationView navigationView = findViewById(R.id.naviview);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
 
         myDrawer.addDrawerListener(toggle);
 
@@ -65,7 +67,19 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     public void onBackPressed() {
         if(myDrawer.isDrawerOpen(GravityCompat.START)){
             myDrawer.closeDrawer(GravityCompat.START);
-        }else{
+        }else {
+            // sign out the user from all providers
+            FirebaseAuth.getInstance().signOut();
+            LoginManager.getInstance().logOut();
+            GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut()
+                    .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Intent intent = new Intent(MainPage.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
             super.onBackPressed();
         }
     }
