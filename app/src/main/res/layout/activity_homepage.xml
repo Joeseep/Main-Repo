@@ -128,11 +128,11 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_coronavirus_24"/>
+                    android:src="@drawable/baseline_logout_24"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ITEM 4"
+                    android:text="LOGOUT"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
             </LinearLayout>

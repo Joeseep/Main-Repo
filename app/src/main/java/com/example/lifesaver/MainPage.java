@@ -36,10 +36,10 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        toggle = new ActionBarDrawerToggle(this,myDrawer,R.string.open,R.string.close);
+
 
         myDrawer.addDrawerListener(toggle);
-        toggle.syncState();
+
 
         if(savedInstanceState==null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,new Diseasefragment()).commit();
