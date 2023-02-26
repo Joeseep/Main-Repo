@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,11 +155,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         // Initialize the Facebook login button
-        LoginButton mFacebookLoginButton = findViewById(R.id.facebook_login_button);
+        mFacebookLoginButton = findViewById(R.id.facebook_login_button);
         mFacebookLoginButton.setPermissions(Arrays.asList("public_profile","email"));
 
 // Initialize the CallbackManager
-        CallbackManager mCallbackManager = CallbackManager.Factory.create();
+        mCallbackManager = CallbackManager.Factory.create();
 
 // Register a callback for Facebook login
         mFacebookLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
