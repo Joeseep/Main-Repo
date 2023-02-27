@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "62391194844",
+    "firebase_url": "https://athena-688cb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "athena-688cb",
+    "storage_bucket": "athena-688cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62391194844:android:d6b45bbcf4f31cbc8b1019",
+        "android_client_info": {
+          "package_name": "com.example.lifesaver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62391194844-jb18duppkk7bka7r06s7f7tb40lh7ila.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lifesaver",
+            "certificate_hash": "b904907bd2b80c75d28d84bd87024538db3b6f98"
+          }
+        },
+        {
+          "client_id": "62391194844-9joeem4ca9k647imbp7hc1dq2hjlcvd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBOD_MlavqMjhpy8sE5Ukb3m3D4-nZ3uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62391194844-9joeem4ca9k647imbp7hc1dq2hjlcvd7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

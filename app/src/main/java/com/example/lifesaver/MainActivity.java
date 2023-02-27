@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent intent = new Intent(MainActivity.this, MainPage.class);
+                        Intent intent = new Intent(MainActivity.this, Homepage.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, "ID: " + id);
 
                             // Start the main activity
-                            Intent intent = new Intent(MainActivity.this, MainPage.class);
+                            Intent intent = new Intent(MainActivity.this, Homepage.class);
                             startActivity(intent);
 
                         } catch (JSONException e) {
