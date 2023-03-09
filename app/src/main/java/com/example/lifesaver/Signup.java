@@ -1,5 +1,6 @@
 package com.example.lifesaver;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -35,6 +36,8 @@ public class Signup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_signup);
 
         // Initialize Firebase Auth and Database instances
@@ -116,15 +119,21 @@ public class Signup extends AppCompatActivity {
                                     }
                                 }
                             });
-                }
-                else{
+                } else {
 // Show an error message if checkbox is not checked
                     Toast.makeText(Signup.this, "Please agree to the terms and conditions", Toast.LENGTH_SHORT).show();
                 }
 
             }
-
         });
+
+    }
+
+    public void openTermsAndConditionsUrl(View view) {
+        String url = "https://www.termsfeed.com/live/3c2670be-853e-4f97-b70b-fa52b78ecf65";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
 }
 

@@ -99,10 +99,22 @@
     <CheckBox
         android:id="@+id/Terms"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@id/PhoneNumber"
-        android:layout_centerHorizontal="true"
-        android:text="I have read and agree with the Terms and Conditions." />
+        android:text="I have read and agree with the" />
+
+    <TextView
+        android:id="@+id/termsAndConditionsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignBaseline="@id/Terms"
+        android:layout_toRightOf="@id/Terms"
+        android:text=" Terms and Conditions"
+        android:textColor="@color/blue"
+        android:textColorLink="@color/blue"
+        android:textStyle="bold"
+        android:onClick="openTermsAndConditionsUrl" />
+
 
 
 </RelativeLayout>
