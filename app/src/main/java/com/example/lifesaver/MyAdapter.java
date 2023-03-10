@@ -38,6 +38,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         Glide.with(context).load(diseaseClassList.get(position).getImageURL()).into(holder.imageid);
         holder.minorname.setText(diseaseClassList.get(position).getName());
         holder.desc.setText(diseaseClassList.get(position).getDescription());
+        holder.cau.setText(diseaseClassList.get(position).getCause());
+        holder.symp.setText(diseaseClassList.get(position).getSymptoms());
+        holder.aid.setText(diseaseClassList.get(position).getFirstaid());
 
         holder.minoritems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +49,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("Image", diseaseClassList.get(holder.getAdapterPosition()).getImageURL());
                 intent.putExtra("Description", diseaseClassList.get(holder.getAdapterPosition()).getDescription());
                 intent.putExtra("Name", diseaseClassList.get(holder.getAdapterPosition()).getName());
-
+                intent.putExtra("Cause", diseaseClassList.get(holder.getAdapterPosition()).getCause());
+                intent.putExtra("Symptom", diseaseClassList.get(holder.getAdapterPosition()).getSymptoms());
+                intent.putExtra("Firstaid", diseaseClassList.get(holder.getAdapterPosition()).getFirstaid());
                 context.startActivity(intent);
             }
         });
@@ -59,7 +64,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 }
 class MyViewHolder extends RecyclerView.ViewHolder{
     ImageView imageid;
-    TextView minorname, desc;
+    TextView minorname, desc, cau, symp, aid;
     CardView minoritems;
 
     public MyViewHolder(@NonNull View itemView){
@@ -69,7 +74,9 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         imageid = itemView.findViewById(R.id.imageid);
         minorname = itemView.findViewById(R.id.minorname);
         minoritems = itemView.findViewById(R.id.minoritems);
-
+        cau = itemView.findViewById(R.id.cau);
+        symp = itemView.findViewById(R.id.symp);
+        aid = itemView.findViewById(R.id.aid);
 
     }
 }

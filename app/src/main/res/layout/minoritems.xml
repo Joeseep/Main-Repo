@@ -33,7 +33,7 @@
             android:layout_toEndOf="@id/imageid"
             android:text="Name"
             android:textSize="20sp" />
-        
+
         <TextView
             android:layout_width="140dp"
             android:layout_height="12dp"
@@ -42,9 +42,33 @@
             android:layout_toEndOf="@id/imageid"
             android:layout_below="@id/minorname"
             android:maxLines="0"/>
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="12dp"
+            android:id="@+id/cau"
+            android:textSize="8sp"
+            android:layout_toEndOf="@id/imageid"
+            android:layout_below="@id/minorname"
+            android:maxLines="0"/>
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="12dp"
+            android:id="@+id/symp"
+            android:textSize="8sp"
+            android:layout_toEndOf="@id/imageid"
+            android:layout_below="@id/minorname"
+            android:maxLines="0"/>
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="12dp"
+            android:id="@+id/aid"
+            android:textSize="8sp"
+            android:layout_toEndOf="@id/imageid"
+            android:layout_below="@id/minorname"
+            android:maxLines="0"/>
     </RelativeLayout>
-    
-    
+
+
 
 
 </androidx.cardview.widget.CardView>

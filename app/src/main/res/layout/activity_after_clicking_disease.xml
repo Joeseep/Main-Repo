@@ -1,39 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".AfterClickingDisease">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/minortitle"
-        android:text="Title"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center"
-        android:textSize="25sp"
-        android:layout_marginBottom="12dp" />
-    
-    <ImageView
-        android:layout_width="400dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:id="@+id/minorimage"
-        android:padding="8dp"
-        android:scaleType="fitXY"
-        />
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="20dp"
-        android:layout_gravity="center"
-        android:id="@+id/descript"
-        android:text="Description"
-        android:textSize="18sp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/minortitle"
+            android:text="Title"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:layout_marginBottom="12dp" />
+
+
+        <ImageView
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:id="@+id/minorimage"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/descript"
+            android:text="Description"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Causes"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:id="@+id/cause"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Symptoms"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:id="@+id/symptoms"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="First Aid Tips"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:id="@+id/firstaid"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="20dp"
+            android:layout_gravity="center"
+            android:id="@+id/next"
+            android:text="Next"
+            android:gravity="end"
+            android:textColor="@color/medyogreen"
+            android:textSize="18sp"/>
+
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>
