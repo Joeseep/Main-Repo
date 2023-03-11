@@ -41,6 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.cau.setText(diseaseClassList.get(position).getCause());
         holder.symp.setText(diseaseClassList.get(position).getSymptoms());
         holder.aid.setText(diseaseClassList.get(position).getFirstaid());
+        holder.prevent.setText(diseaseClassList.get(position).getFirstaid());
 
         holder.minoritems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +53,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("Cause", diseaseClassList.get(holder.getAdapterPosition()).getCause());
                 intent.putExtra("Symptom", diseaseClassList.get(holder.getAdapterPosition()).getSymptoms());
                 intent.putExtra("Firstaid", diseaseClassList.get(holder.getAdapterPosition()).getFirstaid());
+                intent.putExtra("Prevention", diseaseClassList.get(holder.getAdapterPosition()).getPrevention());
                 context.startActivity(intent);
             }
         });
@@ -64,7 +66,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 }
 class MyViewHolder extends RecyclerView.ViewHolder{
     ImageView imageid;
-    TextView minorname, desc, cau, symp, aid;
+    TextView minorname, desc, cau, symp, aid, prevent;
     CardView minoritems;
 
     public MyViewHolder(@NonNull View itemView){
@@ -77,6 +79,7 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         cau = itemView.findViewById(R.id.cau);
         symp = itemView.findViewById(R.id.symp);
         aid = itemView.findViewById(R.id.aid);
+        prevent = itemView.findViewById(R.id.prevent);
 
     }
 }

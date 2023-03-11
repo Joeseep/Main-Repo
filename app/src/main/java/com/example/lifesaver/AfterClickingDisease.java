@@ -18,9 +18,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 public class AfterClickingDisease extends AppCompatActivity {
     DatabaseReference databaseReference;
-    TextView descript, minortitle, cause, symptoms, firstaid;
+    TextView descript, minortitle, cause, symptoms, firstaid, prevention;
     ImageView minorimage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class AfterClickingDisease extends AppCompatActivity {
         cause = findViewById(R.id.cause);
         symptoms = findViewById(R.id.symptoms);
         firstaid = findViewById(R.id.firstaid);
+        prevention = findViewById(R.id.prevention);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
@@ -45,16 +48,24 @@ public class AfterClickingDisease extends AppCompatActivity {
             String[] causeArray = causeText.split("\\*"); // split at each asterisk
             causeText = TextUtils.join("\n\n\u2022", causeArray).trim(); // join with newline character
             cause.setText(causeText);
+
             //symptoms
             String symptomText = bundle.getString("Symptom");
             String[] symptomArray = symptomText.split("\\*");
             symptomText = TextUtils.join("\n\n\u2022", symptomArray).trim();
             symptoms.setText(symptomText);
+
             //fistaid
             String firstaidText = bundle.getString("Firstaid");
             String[] firstaidArray = firstaidText.split("\\*");
             firstaidText = TextUtils.join("\n\n\u2022", firstaidArray).trim();
             firstaid.setText(firstaidText);
+
+            //prevention
+            String preventionText = bundle.getString("Prevention");
+            String[] preventionArray = preventionText.split("\\*");
+            preventionText = TextUtils.join("\n\n\u2022", preventionArray).trim();
+            prevention.setText(preventionText);
             Glide.with(this).load(bundle.getString("Image")).into(minorimage);
         }
     }

@@ -1,7 +1,15 @@
 package com.example.lifesaver;
 
 public class DiseaseClass {
-    private String name, description, imageURL, cause, symptoms, firstaid;
+    private String name, description, imageURL, cause, symptoms, firstaid, prevention;
+
+    public String getPrevention() {
+        return prevention;
+    }
+
+    public void setPrevention(String prevention) {
+        this.prevention = prevention;
+    }
 
     public String getFirstaid() {
         return firstaid;
@@ -51,13 +59,14 @@ public class DiseaseClass {
         this.imageURL = imageURL;
     }
 
-    public DiseaseClass(String name, String description, String imageURL, String cause, String symptoms, String firstaid) {
+    public DiseaseClass(String name, String description, String imageURL, String cause, String symptoms, String firstaid, String prevention) {
         this.name = name;
         this.description = description;
         this.imageURL = imageURL;
         this.cause = cause;
         this.symptoms = symptoms;
         this.firstaid = firstaid;
+        this.prevention = prevention;
     }
     public DiseaseClass(){
 
