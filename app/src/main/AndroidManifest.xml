@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LifeSaver"
         tools:ignore="ExtraText">
+        <activity
+            android:name=".AboutPage"
+            android:exported="false" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

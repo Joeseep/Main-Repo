@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public abstract class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout myDrawer;
     ActionBarDrawerToggle toggle;
 
@@ -43,25 +43,9 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         myDrawer.addDrawerListener(toggle);
 
 
-        if(savedInstanceState==null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,new Diseasefragment()).commit();
-            navigationView.setCheckedItem(R.id.disease);
-        }
-
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.disease:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout,new Diseasefragment()).commit();
-                break;
-            case R.id.signout:
-                Toast.makeText(this,"Logout!",Toast.LENGTH_SHORT).show();
-        }
-        myDrawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+
 
     @Override
     public void onBackPressed() {

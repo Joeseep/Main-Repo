@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -29,8 +33,10 @@ public class Homepage extends AppCompatActivity {
 
         homepagelogout = findViewById(R.id.homepagelogout);
         diseaselayout = findViewById(R.id.diseaselayout);
+
         //para padung sa mga disease
         diseaselayout.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Homepage.this, category_selection.class);
@@ -48,5 +54,30 @@ public class Homepage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.about) {
+            Intent intent = new Intent(this, AboutPage.class);
+            startActivity(intent);
+            return true;
+        } else if (item.getItemId() == R.id.privacy) {
+            String url = "https://www.termsfeed.com/live/becbd1a4-ed32-4158-87ce-462edcc2182d";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

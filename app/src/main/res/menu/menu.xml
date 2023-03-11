@@ -3,9 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/disease"
-        android:title="DISEASES" />
+        android:id="@+id/about"
+        android:title="About LifeSaver" />
     <item
-        android:id="@+id/signout"
-        android:title="Sign Out" />
+        android:id="@+id/privacy"
+        android:title="Privacy Policy" />
+
 </menu>

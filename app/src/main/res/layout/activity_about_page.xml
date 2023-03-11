@@ -1,0 +1,54 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="About LifeSaver"
+            android:textSize="24sp"
+            android:padding="16dp"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="We are a group of computer engineering students from Cebu Institute of Technology University who are passionate about developing innovative solutions that can make a positive impact on people's lives. Our aim with the LifeSaver app is to provide a platform that can help people in emergency situations get the help they need as quickly and efficiently as possible.\n\nThrough our extensive research and collaboration with experts in the field of emergency response, we have designed LifeSaver to be a user-friendly app that can be easily accessed and utilized during critical situations.\n\nWe understand that emergencies can happen at any time, and we want to empower people with the tools they need to act quickly and confidently when they do. With LifeSaver, you can rest assured that you are not alone in times of crisis. Our app is here to help, and we are committed to making a positive difference in the lives of those who use it."
+            android:textSize="16sp"
+            android:padding="16dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/appname"
+            android:padding="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Us"
+            android:textSize="20sp"
+            android:padding="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email: lifesaver@gmail.com"
+            android:textSize="16sp"
+            android:padding="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone: +63 9608522215"
+            android:textSize="16sp"
+            android:padding="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
