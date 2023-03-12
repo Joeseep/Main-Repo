@@ -34,7 +34,7 @@ public class Tips extends AppCompatActivity {
             destext = TextUtils.join("\n\n\u2022", causeArray).trim(); // join with newline character
             des.setText(destext);
 
-            title.setText(bundle.getString("Name"));
+            title.setText(bundle.getString("Title"));
             Glide.with(this).load(bundle.getString("Image")).into(image);
         }
     }
