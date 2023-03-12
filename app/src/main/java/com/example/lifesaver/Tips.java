@@ -29,6 +29,11 @@ public class Tips extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
             des.setText(bundle.getString("Description"));
+            String destext = bundle.getString("Description");
+            String[] causeArray = destext.split("\\*"); // split at each asterisk
+            destext = TextUtils.join("\n\n\u2022", causeArray).trim(); // join with newline character
+            des.setText(destext);
+
             title.setText(bundle.getString("Name"));
             Glide.with(this).load(bundle.getString("Image")).into(image);
         }

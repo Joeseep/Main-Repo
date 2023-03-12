@@ -173,25 +173,29 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 // Get the access token and make a Graph API request
                 AccessToken accessToken = loginResult.getAccessToken();
+
                 GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
 
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         try {
-                            // Get the user's name and ID from the response
-                            String name = object.getString("name");
-                            String id = object.getString("id");
-                            Log.d(TAG, "Name: " + name);
-                            Log.d(TAG, "ID: " + id);
+                            if (object != null) {
+                                // Get the user's name and ID from the response
+                                String name = object.getString("name");
+                                String id = object.getString("id");
+                                Log.d(TAG, "Name: " + name);
+                                Log.d(TAG, "ID: " + id);
+                                Intent intent = new Intent(MainActivity.this, Homepage.class);
+                                startActivity(intent);
 
-                            // Start the main activity
-                            Intent intent = new Intent(MainActivity.this, Homepage.class);
-                            startActivity(intent);
-
+                            } else {
+                                Log.d(TAG, "JSONObject is null");
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
+
                 });
 
                 // Set the parameters for the Graph API request
