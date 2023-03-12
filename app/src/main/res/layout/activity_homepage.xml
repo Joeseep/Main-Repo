@@ -36,8 +36,8 @@
 
                 <ImageView
                     android:id="@+id/diseaseimage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/baseline_coronavirus_24" />
 
                 <TextView
@@ -66,8 +66,8 @@
                 android:gravity="center"
                 android:layout_gravity="center_vertical|center_horizontal">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/baseline_import_contacts_24"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,19 +89,20 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
             <LinearLayout
+                android:id="@+id/tipslayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_gravity="center_vertical|center_horizontal">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_coronavirus_24"/>
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/info"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ITEM 3"
+                    android:text="TIPS"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
             </LinearLayout>
@@ -125,8 +126,8 @@
                 android:gravity="center"
                 android:layout_gravity="center_vertical|center_horizontal">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/baseline_logout_24"/>
                 <TextView
                     android:layout_width="wrap_content"

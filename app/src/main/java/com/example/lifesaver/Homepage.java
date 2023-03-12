@@ -1,8 +1,5 @@
 package com.example.lifesaver;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,18 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
-import com.google.protobuf.Value;
-
-import java.util.List;
 
 public class Homepage extends AppCompatActivity {
-    LinearLayout diseaselayout, homepagelogout;
+    LinearLayout diseaselayout, homepagelogout, tipslayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +27,7 @@ public class Homepage extends AppCompatActivity {
 
         homepagelogout = findViewById(R.id.homepagelogout);
         diseaselayout = findViewById(R.id.diseaselayout);
+        tipslayout = findViewById(R.id.tipslayout);
 
         //para padung sa mga disease
         diseaselayout.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +49,14 @@ public class Homepage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        tipslayout.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Homepage.this, SelectTip.class);
+                startActivity(intent);
+            }
+        });
 
     }
     @Override

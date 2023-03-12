@@ -22,6 +22,12 @@
         android:theme="@style/Theme.LifeSaver"
         tools:ignore="ExtraText">
         <activity
+            android:name=".Tips"
+            android:exported="false" />
+        <activity
+            android:name=".SelectTip"
+            android:exported="false" />
+        <activity
             android:name=".AboutPage"
             android:exported="false" />
 
