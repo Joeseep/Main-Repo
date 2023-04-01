@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,8 @@ public class AfterClickingDisease extends AppCompatActivity {
     DatabaseReference databaseReference;
     TextView descript, minortitle, cause, symptoms, firstaid, prevention;
     ImageView minorimage;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,7 @@ public class AfterClickingDisease extends AppCompatActivity {
         if(bundle!=null){
             descript.setText(bundle.getString("Description"));
             minortitle.setText(bundle.getString("Name"));
+
             //causes
             String causeText = bundle.getString("Cause");
             String[] causeArray = causeText.split("\\*"); // split at each asterisk

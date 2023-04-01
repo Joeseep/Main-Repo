@@ -5,12 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Minordiseases">
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search2"
+        app:queryHint="Search"
+        android:layout_margin="8dp"
+        android:background="@drawable/searchview"
+        app:iconifiedByDefault="false"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/minorrecycleview"
         android:scrollbars="vertical"
-        android:layout_marginTop="20dp"
-        />
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/search2" />
 
 </RelativeLayout>

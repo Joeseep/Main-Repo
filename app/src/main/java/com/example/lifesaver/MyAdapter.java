@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         this.diseaseClassList = diseaseClassList;
     }
 
+    public void setFilteredList(List<DiseaseClass> filteredList){
+        this.diseaseClassList = filteredList;
+        notifyDataSetChanged();
+    }
     @androidx.annotation.NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@androidx.annotation.NonNull ViewGroup parent, int viewType) {
@@ -42,6 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.symp.setText(diseaseClassList.get(position).getSymptoms());
         holder.aid.setText(diseaseClassList.get(position).getFirstaid());
         holder.prevent.setText(diseaseClassList.get(position).getFirstaid());
+
 
         holder.minoritems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +75,7 @@ class MyViewHolder extends RecyclerView.ViewHolder{
     TextView minorname, desc, cau, symp, aid, prevent;
     CardView minoritems;
 
+
     public MyViewHolder(@NonNull View itemView){
         super(itemView);
 
@@ -80,6 +87,5 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         symp = itemView.findViewById(R.id.symp);
         aid = itemView.findViewById(R.id.aid);
         prevent = itemView.findViewById(R.id.prevent);
-
     }
 }
