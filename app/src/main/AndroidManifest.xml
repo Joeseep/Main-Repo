@@ -11,6 +11,7 @@
         tools:node="remove" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LifeSaver"
         tools:ignore="ExtraText">
+        <activity
+            android:name=".Directory"
+            android:exported="false" />
         <activity
             android:name=".Tips"
             android:exported="false" />

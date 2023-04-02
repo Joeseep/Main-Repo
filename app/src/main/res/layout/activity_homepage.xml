@@ -60,6 +60,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
             <LinearLayout
+                android:id="@+id/directorylayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

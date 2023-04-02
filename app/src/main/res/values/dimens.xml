@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="image_width">15dp</dimen>
+    <dimen name="image_height">15dp</dimen>
+</resources>
