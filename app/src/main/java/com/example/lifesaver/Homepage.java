@@ -85,6 +85,14 @@ public class Homepage extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
             return true;
+        }else if(item.getItemId() == R.id.glossary) {
+            Intent intent = new Intent(this, Glossary.class);
+            startActivity(intent);
+            return true;
+        } else if (item.getItemId() == R.id.profile){
+            Intent intent = new Intent(this, Glossary.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

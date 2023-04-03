@@ -3,49 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Directory">
+    tools:context=".Directory"
+    tools:ignore="SpeakableTextPresentCheck">
+
 
     <LinearLayout
         android:id="@+id/linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/direct_title"
-            android:text="Directory"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center"
-            android:textSize="25sp"
-            android:layout_marginBottom="12dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/agency"
-            android:paddingRight="10dp"
-            android:textStyle="bold"
-            android:textSize="22sp"/>
-
-        <TextView
-            android:id="@+id/contact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="10dp"
-            android:textSize="18sp"
-            android:textColor="@color/blue"/>
-
-
 
 
     </LinearLayout>
-
 
 
 </ScrollView>

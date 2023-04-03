@@ -120,8 +120,6 @@ public class Directory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_directory);
-        agency = findViewById(R.id.agency);
-        contact = findViewById(R.id.contact);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Directory");
         databaseReference.addValueEventListener(valueEventListener);
 
