@@ -75,24 +75,8 @@
             android:id="@+id/symptoms"
             android:textSize="18sp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="First Aid Tips"
-            android:textStyle="bold"
-            android:textSize="22sp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="10dp"
-            android:id="@+id/firstaid"
-            android:textSize="18sp"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,6 +95,37 @@
             android:paddingRight="10dp"
             android:id="@+id/prevention"
             android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="First Aid Tips"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:id="@+id/firstaid"
+            android:textSize="18sp"/>
+
+
+
+        <VideoView
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:id="@+id/videotips"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            />
 
         <TextView
             android:layout_width="match_parent"

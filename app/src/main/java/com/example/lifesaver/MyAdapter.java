@@ -2,6 +2,7 @@ package com.example.lifesaver;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.symp.setText(diseaseClassList.get(position).getSymptoms());
         holder.aid.setText(diseaseClassList.get(position).getFirstaid());
         holder.prevent.setText(diseaseClassList.get(position).getFirstaid());
+        holder.video.setVideoPath(diseaseClassList.get(position).getVideoURL());
+        holder.video.start();
 
 
         holder.minoritems.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("Symptom", diseaseClassList.get(holder.getAdapterPosition()).getSymptoms());
                 intent.putExtra("Firstaid", diseaseClassList.get(holder.getAdapterPosition()).getFirstaid());
                 intent.putExtra("Prevention", diseaseClassList.get(holder.getAdapterPosition()).getPrevention());
+                intent.putExtra("Video", diseaseClassList.get(holder.getAdapterPosition()).getVideoURL());
                 context.startActivity(intent);
             }
         });
@@ -74,6 +78,7 @@ class MyViewHolder extends RecyclerView.ViewHolder{
     ImageView imageid;
     TextView minorname, desc, cau, symp, aid, prevent;
     CardView minoritems;
+    VideoView video;
 
 
     public MyViewHolder(@NonNull View itemView){
@@ -87,5 +92,6 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         symp = itemView.findViewById(R.id.symp);
         aid = itemView.findViewById(R.id.aid);
         prevent = itemView.findViewById(R.id.prevent);
+        video = itemView.findViewById(R.id.video);
     }
 }

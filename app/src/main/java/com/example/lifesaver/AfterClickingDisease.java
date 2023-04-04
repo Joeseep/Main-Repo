@@ -1,8 +1,12 @@
 package com.example.lifesaver;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -16,6 +20,8 @@ public class AfterClickingDisease extends AppCompatActivity {
     DatabaseReference databaseReference;
     TextView descript, minortitle, cause, symptoms, firstaid, prevention;
     ImageView minorimage;
+
+    VideoView videotips;
 
 
     @Override
@@ -32,6 +38,7 @@ public class AfterClickingDisease extends AppCompatActivity {
         symptoms = findViewById(R.id.symptoms);
         firstaid = findViewById(R.id.firstaid);
         prevention = findViewById(R.id.prevention);
+        videotips = findViewById(R.id.videotips);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
@@ -62,6 +69,25 @@ public class AfterClickingDisease extends AppCompatActivity {
             preventionText = TextUtils.join("\n\n\u2022", preventionArray).trim();
             prevention.setText(preventionText);
             Glide.with(this).load(bundle.getString("Image")).into(minorimage);
+
+            String videoURL = bundle.getString("Video");
+            if(!TextUtils.isEmpty(videoURL)){
+                videotips.setVideoURI(Uri.parse(videoURL));
+                //videotips.start();
+
+                videotips.setMediaController(null);
+
+                MediaController mediaController = new MediaController(this);
+                mediaController.setAnchorView(videotips);
+                videotips.setMediaController(mediaController);
+
+                videotips.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mediaController.hide();
+                    }
+                });
+            }
         }
     }
 }

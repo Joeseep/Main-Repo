@@ -19,13 +19,17 @@ import java.util.List;
 
 public class TipAdapter extends RecyclerView.Adapter<TipViewHolder> {
     private final Context context;
-    private final List<TipClass> TipClassList;
+    private List<TipClass> TipClassList;
 
     public TipAdapter(Context context, List<TipClass> TipClassList) {
         this.context = context;
         this.TipClassList = TipClassList;
     }
 
+    public void setFilteredTips(List<TipClass> filteredTips){
+        this.TipClassList = filteredTips;
+        notifyDataSetChanged();
+    }
     @androidx.annotation.NonNull
     @Override
     public TipViewHolder onCreateViewHolder(@androidx.annotation.NonNull ViewGroup parent, int viewType) {
