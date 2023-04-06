@@ -14,5 +14,8 @@
     <item
         android:id="@+id/about"
         android:title="About LifeSaver" />
+    <item
+        android:id="@+id/report"
+        android:title="Report Experience" />
 
 </menu>

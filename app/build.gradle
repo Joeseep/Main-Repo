@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -54,6 +54,14 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.sun.mail:android-mail:1.6.0'
+    implementation 'com.sun.mail:android-activation:1.6.0'
+    implementation 'com.google.api-client:google-api-client:1.31.0'
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
+
+
 }
 tasks.whenTaskAdded { task ->
     if (task.name == 'mapDebugSourceSetPaths') {

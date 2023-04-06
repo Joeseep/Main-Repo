@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Please tell us about your experience"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_heading"
+        android:layout_marginTop="16dp"
+        android:background="@color/gray"
+        android:text="Report"
+        tools:ignore="TextContrastCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_heading"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@+id/btn_report"
+        android:background="@color/gray"
+        android:text="Comment"
+        tools:ignore="TextContrastCheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_heading"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@+id/btn_comment"
+        android:background="@color/gray"
+        android:text="Suggest"
+        tools:ignore="TextContrastCheck" />
+
+
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_report"
+        android:layout_marginTop="16dp"
+        android:hint="Enter your message here"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_message"
+        android:layout_marginTop="16dp"
+        android:text="Submit"
+        android:background="@color/purple_500"
+        android:textColor="@android:color/white"/>
+
+</RelativeLayout>

@@ -106,7 +106,9 @@ public class Signup extends AppCompatActivity {
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         // Save user details in Firebase Database
                                         String userId = Objects.requireNonNull(user).getUid();
-                                        User newUser = new User(fullName, email, address, phoneNumber);
+                                        String defaultPicUrl = "https://firebasestorage.googleapis.com/v0/b/athena-688cb.appspot.com/o/User%20profiles%2Fno_profile.jpg?alt=media&token=2a443f47-ec72-42ef-9c2d-da8cfcf2563d";
+                                        User newUser = new User(fullName, email, address, phoneNumber,defaultPicUrl);
+                                        mDatabase.child("users").child(userId).child("profilePicUrl").setValue(defaultPicUrl);
                                         mDatabase.child("users").child(userId).setValue(newUser);
                                         // Redirect user to Home activity
                                         startActivity(new Intent(Signup.this, MainActivity.class));

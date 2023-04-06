@@ -5,13 +5,17 @@ public class User {
     private String email;
     private String address;
     private String phoneNumber;
+    private String profilePictureUrl;
 
-    public User(String fullName, String email, String address, String phoneNumber) {
+    public User(String fullName, String email, String address, String phoneNumber, String profilePictureUrl)
+    {
         this.fullName = fullName;
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.profilePictureUrl = profilePictureUrl;
     }
+
 
     public String getFullName() {
         return fullName;
@@ -28,4 +32,6 @@ public class User {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+    public String getProfilePictureUrl() {return profilePictureUrl;}
+
 }

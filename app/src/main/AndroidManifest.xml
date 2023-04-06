@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.lifesaver" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,7 +20,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.LifeSaver"
-        tools:ignore="ExtraText" >
+        tools:ignore="ExtraText">
+        <activity
+            android:name=".Report"
+            android:exported="false" />
         <activity
             android:name=".Profile"
             android:exported="false" />
@@ -87,7 +89,7 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" >
+            android:windowSoftInputMode="adjustResize">
 
             <!-- Facebook Login -->
             <intent-filter>
@@ -110,7 +112,7 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" />
         <activity
             android:name="com.facebook.CustomTabActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

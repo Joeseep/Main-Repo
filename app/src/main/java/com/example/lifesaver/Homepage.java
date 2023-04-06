@@ -90,7 +90,12 @@ public class Homepage extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.profile){
-            Intent intent = new Intent(this, Glossary.class);
+            Intent intent = new Intent(this, Profile.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (item.getItemId() == R.id.report){
+            Intent intent = new Intent(this, Report.class);
             startActivity(intent);
             return true;
         }
