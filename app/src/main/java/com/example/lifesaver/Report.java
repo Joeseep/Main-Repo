@@ -142,14 +142,16 @@ public class Report extends AppCompatActivity implements View.OnClickListener {
                 return new PasswordAuthentication("infin8.lifesaver@gmail.com", "ywzlbqytlaepqazn");
             }
         });
-
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String userEmail = currentUser.getEmail();
         // Set up email message
         final String subject = category;
-        final String body = message;
+        final String body = "FROM: "+userEmail+"\n"+ message;
         final MimeMessage mimeMessage = new MimeMessage(session);
         try {
             mimeMessage.setFrom(new InternetAddress("infin8.lifesaver@gmail.com"));
-            mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse("infin8.lifesaver@gmail.com"));
+            mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse("feedback.lifesaver@gmail.com"));
             mimeMessage.setSubject(subject);
             mimeMessage.setText(body);
         } catch (MessagingException e) {

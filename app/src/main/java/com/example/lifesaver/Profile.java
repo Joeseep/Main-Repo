@@ -211,6 +211,10 @@ public class Profile extends AppCompatActivity {
             // Dismiss edit dialog
             editDialog.dismiss();
         });
+        Button cancelButton = editDialog.findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(view ->{
+            editDialog.dismiss();
+        });
 
         editDialog.show();
     }

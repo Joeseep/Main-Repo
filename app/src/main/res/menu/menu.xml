@@ -16,6 +16,6 @@
         android:title="About LifeSaver" />
     <item
         android:id="@+id/report"
-        android:title="Report Experience" />
+        android:title="Send Feedback" />
 
 </menu>
