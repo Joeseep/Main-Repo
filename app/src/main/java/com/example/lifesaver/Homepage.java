@@ -17,7 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Homepage extends AppCompatActivity {
-    LinearLayout diseaselayout, homepagelogout, tipslayout, directorylayout;
+    LinearLayout diseaselayout, homepagelogout, tipslayout, directorylayout, profile, glossary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,9 @@ public class Homepage extends AppCompatActivity {
         diseaselayout = findViewById(R.id.diseaselayout);
         tipslayout = findViewById(R.id.tipslayout);
         directorylayout = findViewById(R.id.directorylayout);
+        profile = findViewById(R.id.profile);
+        glossary = findViewById(R.id.glossary);
+
 
         //para padung sa mga disease
         diseaselayout.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +68,20 @@ public class Homepage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Homepage.this, Profile.class);
+                startActivity(intent);
+            }
+        });
+        glossary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Homepage.this, Glossary.class);
+                startActivity(intent);
+            }
+        });
 
     }
     @Override
@@ -85,16 +102,7 @@ public class Homepage extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
             return true;
-        }else if(item.getItemId() == R.id.glossary) {
-            Intent intent = new Intent(this, Glossary.class);
-            startActivity(intent);
-            return true;
-        } else if (item.getItemId() == R.id.profile){
-            Intent intent = new Intent(this, Profile.class);
-            startActivity(intent);
-            return true;
-        }
-        else if (item.getItemId() == R.id.report){
+        } else if (item.getItemId() == R.id.report){
             Intent intent = new Intent(this, Report.class);
             startActivity(intent);
             return true;

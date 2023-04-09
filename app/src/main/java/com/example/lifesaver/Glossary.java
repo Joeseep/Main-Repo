@@ -75,11 +75,26 @@ public class Glossary extends AppCompatActivity {
 
     private void addTextView(String word, String def) {
         TextView textView = new TextView(this);
-        SpannableString spannableString = new SpannableString(String.format("%s: %s", word, def));
+        SpannableString spannableString = new SpannableString(String.format("%s\n %s", word, def));
         spannableString.setSpan(new StyleSpan(Typeface.BOLD), 0, word.length() + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new RelativeSizeSpan(1.2f), 0, word.length() + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(spannableString);
+
+        // Set the bottom margin of the TextView to 10dp
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 0, 0, dpToPx(10));
+        textView.setLayoutParams(params);
+
         mLinearLayout.addView(textView);
+    }
+
+    // Utility method to convert dp to pixels
+    private int dpToPx(int dp) {
+        float density = getResources().getDisplayMetrics().density;
+        return Math.round((float) dp * density);
     }
 
 

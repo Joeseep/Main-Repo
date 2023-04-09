@@ -7,8 +7,7 @@ public class User {
     private String phoneNumber;
     private String profilePictureUrl;
 
-    public User(String fullName, String email, String address, String phoneNumber, String profilePictureUrl)
-    {
+    public User(String fullName, String email, String address, String phoneNumber, String profilePictureUrl) {
         this.fullName = fullName;
         this.email = email;
         this.address = address;
@@ -34,4 +33,8 @@ public class User {
     }
     public String getProfilePictureUrl() {return profilePictureUrl;}
 
+    public User(){
+
+    }
 }
+
