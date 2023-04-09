@@ -1,10 +1,18 @@
 package com.example.lifesaver;
 
 public class TipClass {
-    private String title, description, image;
+    private String title, description, image, videoTIP;
 
     public String getTitle() {
         return title;
+    }
+
+    public String getVideoTIP() {
+        return videoTIP;
+    }
+
+    public void setVideoTIP(String videoTIP) {
+        this.videoTIP = videoTIP;
     }
 
     public void setTitle(String title) {
@@ -28,10 +36,11 @@ public class TipClass {
     }
 
 
-    public TipClass(String title, String description, String image) {
+    public TipClass(String title, String description, String image, String videoTIP) {
         this.title = title;
         this.description = description;
         this.image = image;
+        this.videoTIP = videoTIP;
     }
     public TipClass(){
 

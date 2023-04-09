@@ -49,6 +49,15 @@
             android:id="@+id/tip_des"
             android:textSize="18sp"/>
 
+        <VideoView
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:id="@+id/videotip"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            />
+
     </LinearLayout>
 
 

@@ -24,6 +24,15 @@
             android:scaleType="centerCrop"
             android:padding="8dp" />
 
+        <VideoView
+            android:id="@+id/tipvideo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:padding="8dp"
+            android:scaleType="centerCrop"
+            android:visibility="invisible" />
+
         <TextView
             android:id="@+id/title"
             android:layout_width="238dp"

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +44,8 @@ public class TipAdapter extends RecyclerView.Adapter<TipViewHolder> {
         Glide.with(context).load(TipClassList.get(position).getImage()).into(holder.image);
         holder.title.setText(TipClassList.get(position).getTitle());
         holder.description.setText(TipClassList.get(position).getDescription());
+        holder.tipvideo.setVideoPath(TipClassList.get(position).getVideoTIP());
+        holder.tipvideo.start();
 
         holder.tipitems.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +54,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipViewHolder> {
                 intent.putExtra("Image", TipClassList.get(holder.getAdapterPosition()).getImage());
                 intent.putExtra("Description", TipClassList.get(holder.getAdapterPosition()).getDescription());
                 intent.putExtra("Title", TipClassList.get(holder.getAdapterPosition()).getTitle());
+                intent.putExtra("TipVideo", TipClassList.get(holder.getAdapterPosition()).getVideoTIP());
                 context.startActivity(intent);
             }
         });
@@ -67,6 +71,8 @@ class TipViewHolder extends RecyclerView.ViewHolder {
     TextView title, description;
     CardView tipitems;
 
+    VideoView tipvideo;
+
     public TipViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -74,7 +80,7 @@ class TipViewHolder extends RecyclerView.ViewHolder {
         image = itemView.findViewById(R.id.image);
         title = itemView.findViewById(R.id.title);
         tipitems = itemView.findViewById(R.id.tipitems);
-
+        tipvideo = itemView.findViewById(R.id.tipvideo);
 
     }
 }
