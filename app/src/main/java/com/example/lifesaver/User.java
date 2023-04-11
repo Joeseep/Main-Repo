@@ -15,7 +15,25 @@ public class User {
         this.profilePictureUrl = profilePictureUrl;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
     public String getFullName() {
         return fullName;
     }

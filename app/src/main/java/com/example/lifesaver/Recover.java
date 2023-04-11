@@ -25,6 +25,7 @@ public class Recover extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recover);
+        setTheme(androidx.appcompat.R.style.Theme_AppCompat_DayNight_NoActionBar);
 
         emailInput = findViewById(R.id.email_input);
         sendResetLinkButton = findViewById(R.id.send_reset_link_button);

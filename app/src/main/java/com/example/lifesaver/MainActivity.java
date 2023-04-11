@@ -23,6 +23,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -36,22 +37,19 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private Button mLoginButton;
-    private TextView mCreateAccountText;
-    private TextView mForgotPasswordText;
-    private SignInButton mGoogleLoginButton;
-    private LoginButton mFacebookLoginButton;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
     private EditText mEmailInput;
@@ -70,46 +68,146 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             String email = user.getEmail();
                             String name = user.getDisplayName();
+                            String profilePictureURL = "https://firebasestorage.googleapis.com/v0/b/athena-688cb.appspot.com/o/User%20profiles%2Fno_profile.jpg?alt=media&token=2a443f47-ec72-42ef-9c2d-da8cfcf2563d";
 
-                            mDatabase.child("users").orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                            // Check if user already exists with this email address
+                            mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    boolean userExists = snapshot.exists();
-                                    if (userExists) {
-                                        Intent intent = new Intent(MainActivity.this, Homepage.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-
-                                        String profilePictureUrl = "https://firebasestorage.googleapis.com/v0/b/athena-688cb.appspot.com/o/User%20profiles%2Fno_profile.jpg?alt=media&token=2a443f47-ec72-42ef-9c2d-da8cfcf2563d";
-                                        User userObj = new User(name, email, " ", "", profilePictureUrl);
-                                        mDatabase.child("users").child(user.getUid()).setValue(userObj)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                    if (task.isSuccessful()) {
+                                        SignInMethodQueryResult result = task.getResult();
+                                        List<String> signInMethods = result.getSignInMethods();
+                                        if (signInMethods != null && signInMethods.contains(GoogleAuthProvider.PROVIDER_ID)) {
+                                            // User already signed up with Google, check if they are already linked
+                                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                                            List<? extends UserInfo> providerData = currentUser.getProviderData();
+                                            boolean isAlreadyLinked = false;
+                                            for (UserInfo userInfo : providerData) {
+                                                if (GoogleAuthProvider.PROVIDER_ID.equals(userInfo.getProviderId())) {
+                                                    isAlreadyLinked = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (isAlreadyLinked) {
+                                                // User is already linked with the given provider, log them in and proceed to home page
+                                                Log.d(TAG, "User already linked with Google, signing in...");
+                                                startActivity(new Intent(MainActivity.this, Homepage.class));
+                                                finish();
+                                            } else {
+                                                // User is not linked with the given provider, link credentials and sign them in
+                                                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                                                user.linkWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                     @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Log.d(TAG, "User profile is created successfully.");
-                                                        // Start the homepage activity
-                                                        Intent intent = new Intent(MainActivity.this, Homepage.class);
-                                                        startActivity(intent);
-                                                        finish();
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Log.e(TAG, "Failed to create user profile.", e);
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Log.d(TAG, "Linked Google credentials successfully.");
+                                                            startActivity(new Intent(MainActivity.this, Homepage.class));
+                                                            finish();
+                                                        } else {
+                                                            Log.e(TAG, "Failed to link Google credentials", task.getException());
+                                                        }
                                                     }
                                                 });
+                                            }
+                                        } else {
+                                            // User is not signed up with Google, create a new account
+                                            User userObj = new User(name, email, "", " ", profilePictureURL);
+                                            mDatabase.child("users").child(user.getUid()).setValue(userObj)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Log.d(TAG, "Created new user account.");
+                                                                startActivity(new Intent(MainActivity.this, Homepage.class));
+                                                                finish();
+                                                            } else {
+                                                                Log.e(TAG, "Failed to create new user account.", task.getException());
+                                                            }
+                                                        }
+                                                    });
+                                        }
+                                    } else {
+                                        Log.e(TAG, "Failed to fetch sign-in methods for email", task.getException());
                                     }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-                                    Log.e(TAG, "Failed to read data from Firebase Database.", error.toException());
                                 }
                             });
                         } else {
                             Log.e(TAG, "Failed to authenticate with Google.", task.getException());
+                        }
+                    }
+                });
+    }
+
+
+
+    private void handleFacebookAccessToken(AccessToken token) {
+        Log.d(TAG, "handleFacebookAccessToken:" + token);
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String email = user.getEmail();
+                            String name = user.getDisplayName();
+
+                            mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                    if (task.isSuccessful()) {
+                                        SignInMethodQueryResult result = task.getResult();
+                                        List<String> signInMethods = result.getSignInMethods();
+                                        String profilePictureUrl = "https://firebasestorage.googleapis.com/v0/b/athena-688cb.appspot.com/o/User%20profiles%2Fno_profile.jpg?alt=media&token=2a443f47-ec72-42ef-9c2d-da8cfcf2563d";
+
+                                        if (signInMethods != null) {
+                                            if (signInMethods.contains(EmailAuthProvider.PROVIDER_ID)) {
+                                                // User already signed up with email/password, sign them in
+                                                startActivity(new Intent(MainActivity.this, Homepage.class));
+                                                finish();
+                                            } else if (signInMethods.contains(GoogleAuthProvider.PROVIDER_ID)) {
+                                                // User already signed up with Google, sign them in
+                                                startActivity(new Intent(MainActivity.this, Homepage.class));
+                                                finish();
+                                            } else if (signInMethods.contains(FacebookAuthProvider.PROVIDER_ID)) {
+                                                // User already signed up with Facebook, sign them in
+                                                startActivity(new Intent(MainActivity.this, Homepage.class));
+                                                finish();
+                                            } else {
+                                                // User doesn't exist, create a new user object and save to Firebase Database
+                                                User userObj = new User(name, email, "", " ", profilePictureUrl);
+                                                mDatabase.child("users").child(user.getUid()).setValue(userObj)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                Log.d(TAG, "User profile is created successfully.");
+                                                                // Start the homepage activity
+                                                                Intent intent = new Intent(MainActivity.this, Homepage.class);
+                                                                startActivity(intent);
+                                                                finish();
+                                                            }
+                                                        })
+                                                        .addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Log.w(TAG, "Error adding user to Firebase", e);
+                                                            }
+                                                        });
+                                            }
+                                        }
+                                    } else {
+                                        Log.e(TAG, "Failed to fetch sign-in methods for email", task.getException());
+                                    }
+                                }
+                            });
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            LoginManager.getInstance().logOut();
                         }
                     }
                 });
@@ -125,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
                         // Handle the Google Sign-In result
                         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
                             firebaseAuthWithGoogle(task.getResult());
+
 
 
                     } else {
@@ -144,40 +243,32 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        setTheme(androidx.appcompat.R.style.Theme_AppCompat_DayNight_NoActionBar);
         setContentView(R.layout.activity_main);
-
 
         mAuth = FirebaseAuth.getInstance();
         mEmailInput = findViewById(R.id.email_input);
         mPasswordInput = findViewById(R.id.password_input);
-        mLoginButton = findViewById(R.id.login_button);
-        mCreateAccountText = findViewById(R.id.create_account_text);
-        mForgotPasswordText = findViewById(R.id.forgot_password);
-        mGoogleLoginButton = findViewById(R.id.google_login_button);
-        mFacebookLoginButton = findViewById(R.id.facebook_login_button);
+        Button mLoginButton = findViewById(R.id.login_button);
+        TextView mCreateAccountText = findViewById(R.id.create_account_text);
+        TextView mForgotPasswordText = findViewById(R.id.forgot_password);
+        SignInButton mGoogleLoginButton = findViewById(R.id.google_login_button);
+        LoginButton mFacebookLoginButton = findViewById(R.id.facebook_login_button);
         mCallbackManager = CallbackManager.Factory.create();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        boolean isLoggedInFacebook = accessToken != null && !accessToken.isExpired();
-
-        if (currentUser != null && currentUser.isEmailVerified() || isLoggedInFacebook) {
-            // User is already logged in and email is verified or logged in with Facebook, redirect to Home page
-            Intent intent = new Intent(MainActivity.this, Homepage.class);
+        if (currentUser != null && currentUser.isEmailVerified()) {
+            Intent intent = new Intent(this, Homepage.class);
             startActivity(intent);
             finish();
+        } else if (currentUser != null) {
+            String providerId = mAuth.getCurrentUser().getProviderData().get(1).getProviderId();
+            if (providerId.equals("facebook.com")) {
+                startActivity(new Intent(this, Homepage.class));
+                finish();
+            }
         }
-        else if (currentUser != null && !currentUser.isEmailVerified()) {
-            // User is logged in but email is not verified, show a message to the user to verify their email
-            Toast.makeText(MainActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
-        }
-        else {
-                // User is not logged in, show the login screen
-            Toast.makeText(MainActivity.this, "Please log in to continue.", Toast.LENGTH_LONG).show();
-        }
-
 
 
         // Configure Google Sign-In
@@ -267,9 +358,10 @@ public class MainActivity extends AppCompatActivity {
                                 // Check if email is verified
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 if (user.isEmailVerified()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    startActivity(new Intent(MainActivity.this, Homepage.class));
-                                    finish();
+                                   Intent intent = new Intent(MainActivity.this, Homepage.class);
+                                   startActivity(intent);
+                                   finish();
+
                                 } else {
                                     // If email is not verified, display a message to the user.
                                     Toast.makeText(MainActivity.this, "Please verify your email before logging in.", Toast.LENGTH_SHORT).show();
@@ -291,6 +383,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Signup.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -299,81 +392,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Recover.class);
                 startActivity(intent);
+                finish();
             }
         });
 
     }
-    // Handle Facebook Access Token
-    private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String email = user.getEmail();
-                            String name = user.getDisplayName();
-
-                            mDatabase.child("users").orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    boolean userExists = snapshot.exists();
-                                    if (userExists) {
-                                        // The user has already signed up before
-                                        // Start the homepage activity
-                                        Intent intent = new Intent(MainActivity.this, Homepage.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        // Use the default profile picture URL
-                                        String profilePictureUrl = "https://firebasestorage.googleapis.com/v0/b/athena-688cb.appspot.com/o/User%20profiles%2Fno_profile.jpg?alt=media&token=2a443f47-ec72-42ef-9c2d-da8cfcf2563d";
-
-                                        // Create a new User object with the retrieved information
-                                        User userObj = new User(name, email, " ", "", profilePictureUrl);
-
-                                        // Save the user object to Firebase Database
-                                        mDatabase.child("users").child(user.getUid()).setValue(userObj)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Log.d(TAG, "User profile is created successfully.");
-                                                        // Start the homepage activity
-                                                        Intent intent = new Intent(MainActivity.this, Homepage.class);
-                                                        startActivity(intent);
-                                                        finish();
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Log.w(TAG, "Error adding user to Firebase", e);
-                                                    }
-                                                });
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-                                    Log.w(TAG, "Error querying user from Firebase", error.toException());
-                                }
-                            });
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
 
 
 }
+
+
+
 
 
 

@@ -3,10 +3,13 @@ package com.example.lifesaver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,14 +18,61 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Homepage extends AppCompatActivity {
     LinearLayout diseaselayout, homepagelogout, tipslayout, directorylayout, profile, glossary;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        recreate();
+
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if (user == null) {
+            // User is not logged in, return to MainActivity
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+
+            // User is logged in, check if their email still exists in the database
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("users").orderByChild("email").equalTo(user.getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.exists()) {
+                        mAuth.signOut();
+                        LoginManager.getInstance().logOut();
+                        Intent intent = new Intent(Homepage.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Failed to read value
+                    Log.w("CHECK", "Failed to read value.", databaseError.toException());
+                }
+            });
+
+        }
+
+
 
 
         homepagelogout = findViewById(R.id.homepagelogout);
@@ -31,6 +81,7 @@ public class Homepage extends AppCompatActivity {
         directorylayout = findViewById(R.id.directorylayout);
         profile = findViewById(R.id.profile);
         glossary = findViewById(R.id.glossary);
+
 
 
         //para padung sa mga disease

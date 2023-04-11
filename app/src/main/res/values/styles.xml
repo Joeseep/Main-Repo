@@ -2,8 +2,8 @@
 
 <resources>
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/teal_200</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/com_facebook_blue</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/light_green</item>
     </style>
 </resources>
