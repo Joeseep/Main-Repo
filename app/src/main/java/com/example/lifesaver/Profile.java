@@ -19,8 +19,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,9 +37,8 @@ import java.util.Map;
 
 public class Profile extends AppCompatActivity {
 
-    private TextView mProfileName, mProfileEmail, mProfileAddress, mProfilePhone;
+    private TextView mProfileName, mProfileAddress, mProfilePhone;
     private ImageView mProfileImage;
-    private Button mUploadProfileButton, mEditButton;
 
     private FirebaseUser mCurrentUser;
     private DatabaseReference mDatabaseReference;
@@ -56,12 +53,11 @@ public class Profile extends AppCompatActivity {
 
         // Initialize UI components
         mProfileName = findViewById(R.id.profile_name);
-        mProfileEmail = findViewById(R.id.profile_email);
         mProfileAddress = findViewById(R.id.profile_address);
         mProfilePhone = findViewById(R.id.profile_phone);
         mProfileImage = findViewById(R.id.profile_image);
-        mUploadProfileButton = findViewById(R.id.upload_profile);
-        mEditButton = findViewById(R.id.edit_button);
+        Button mUploadProfileButton = findViewById(R.id.upload_profile);
+        Button mEditButton = findViewById(R.id.edit_button);
 
         // Initialize Firebase components
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,13 +78,11 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("fullName").getValue(String.class);
-                String email = dataSnapshot.child("email").getValue(String.class);
                 String address = dataSnapshot.child("address").getValue(String.class);
                 String phone = dataSnapshot.child("phoneNumber").getValue(String.class);
                 String profilePictureUrl = dataSnapshot.child("profilePictureUrl").getValue(String.class);
 
                 mProfileName.setText(name);
-                mProfileEmail.setText(email);
                 mProfileAddress.setText(address);
                 mProfilePhone.setText(phone);
 
@@ -110,7 +104,7 @@ public class Profile extends AppCompatActivity {
     }
 
     // Method to choose profile image
-    private ActivityResultLauncher<String> getContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+    private final ActivityResultLauncher<String> getContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
                 @Override
                 public void onActivityResult(Uri uri) {
@@ -124,17 +118,9 @@ public class Profile extends AppCompatActivity {
                                 if (currentUrl != null && !currentUrl.equals(DEFAULT_PICTURE_URL)) {
                                     // Delete the old profile picture if it is not the default picture
                                     StorageReference oldFileReference = FirebaseStorage.getInstance().getReferenceFromUrl(currentUrl);
-                                    oldFileReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            uploadNewProfilePicture(uri);
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(Profile.this, "Failed to delete old profile picture", Toast.LENGTH_SHORT).show();
-                                            Log.e("Profile", "Error deleting old profile picture", e);
-                                        }
+                                    oldFileReference.delete().addOnSuccessListener(unused -> uploadNewProfilePicture(uri)).addOnFailureListener(e -> {
+                                        Toast.makeText(Profile.this, "Failed to delete old profile picture", Toast.LENGTH_SHORT).show();
+                                        Log.e("Profile", "Error deleting old profile picture", e);
                                     });
                                 } else {
                                     uploadNewProfilePicture(uri);
@@ -161,9 +147,7 @@ public class Profile extends AppCompatActivity {
             downloadUrlTask.addOnSuccessListener(downloadUri -> {
                 // Update the user's profile picture URL in Firebase database
                 mDatabaseReference.child("profilePictureUrl").setValue(downloadUri.toString())
-                        .addOnSuccessListener(aVoid -> {
-                            Toast.makeText(Profile.this, "Profile picture updated", Toast.LENGTH_SHORT).show();
-                        })
+                        .addOnSuccessListener(aVoid -> Toast.makeText(Profile.this, "Profile picture updated", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e -> {
                             Toast.makeText(Profile.this, "Failed to update profile picture", Toast.LENGTH_SHORT).show();
                             Log.e("Profile", "Error updating profile picture URL", e);
@@ -188,13 +172,11 @@ public class Profile extends AppCompatActivity {
         editDialog.setTitle("Edit Profile");
 
         EditText nameEditText = editDialog.findViewById(R.id.edit_name);
-        EditText emailEditText = editDialog.findViewById(R.id.edit_email);
         EditText addressEditText = editDialog.findViewById(R.id.edit_address);
         EditText phoneEditText = editDialog.findViewById(R.id.edit_phone);
 
         // Load current profile data into edit dialog
         nameEditText.setText(mProfileName.getText().toString());
-        emailEditText.setText(mProfileEmail.getText().toString());
         addressEditText.setText(mProfileAddress.getText().toString());
         phoneEditText.setText(mProfilePhone.getText().toString());
 
@@ -202,29 +184,25 @@ public class Profile extends AppCompatActivity {
         saveButton.setOnClickListener(view -> {
             // Get updated profile data from edit dialog
             String updatedName = nameEditText.getText().toString();
-            String updatedEmail = emailEditText.getText().toString();
             String updatedAddress = addressEditText.getText().toString();
             String updatedPhone = phoneEditText.getText().toString();
             // Update profile data in Firebase database
-            updateProfileData(updatedName, updatedEmail, updatedAddress, updatedPhone);
+            updateProfileData(updatedName, updatedAddress, updatedPhone);
 
             // Dismiss edit dialog
             editDialog.dismiss();
         });
         Button cancelButton = editDialog.findViewById(R.id.cancel_button);
-        cancelButton.setOnClickListener(view ->{
-            editDialog.dismiss();
-        });
+        cancelButton.setOnClickListener(view -> editDialog.dismiss());
 
         editDialog.show();
     }
 
     // Method to update profile data in Firebase database
-    private void updateProfileData(String name, String email, String address, String phone) {
+    private void updateProfileData(String name, String address, String phone) {
         // Update profile data in Firebase database
         Map<String, Object> updateData = new HashMap<>();
         updateData.put("fullName", name);
-        updateData.put("email", email);
         updateData.put("address", address);
         updateData.put("phoneNumber", phone);
         mDatabaseReference.updateChildren(updateData)
