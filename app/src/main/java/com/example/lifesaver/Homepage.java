@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +17,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Homepage extends AppCompatActivity {
     LinearLayout diseaselayout, homepagelogout, tipslayout, directorylayout, profile, glossary;
+    @Override
+    public void onBackPressed() {
+        recreate();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,53 +37,33 @@ public class Homepage extends AppCompatActivity {
 
 
         //para padung sa mga disease
-        diseaselayout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Homepage.this, category_selection.class);
-                startActivity(intent);
-            }
+        diseaselayout.setOnClickListener(view -> {
+            Intent intent = new Intent(Homepage.this, category_selection.class);
+            startActivity(intent);
         });
         //para sa logout
-        homepagelogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                LoginManager.getInstance().logOut();
-                GoogleSignIn.getClient(Homepage.this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
-                Intent intent = new Intent(Homepage.this, MainActivity.class);
-                startActivity(intent);
-            }
+        homepagelogout.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            LoginManager.getInstance().logOut();
+            GoogleSignIn.getClient(Homepage.this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
+            Intent intent = new Intent(Homepage.this, MainActivity.class);
+            startActivity(intent);
         });
-        tipslayout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Homepage.this, SelectTip.class);
-                startActivity(intent);
-            }
+        tipslayout.setOnClickListener(view -> {
+            Intent intent = new Intent(Homepage.this, SelectTip.class);
+            startActivity(intent);
         });
-        directorylayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Homepage.this, Directory.class);
-                startActivity(intent);
-            }
+        directorylayout.setOnClickListener(v -> {
+            Intent intent = new Intent(Homepage.this, Directory.class);
+            startActivity(intent);
         });
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Homepage.this, Profile.class);
-                startActivity(intent);
-            }
+        profile.setOnClickListener(v -> {
+            Intent intent = new Intent(Homepage.this, Profile.class);
+            startActivity(intent);
         });
-        glossary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Homepage.this, Glossary.class);
-                startActivity(intent);
-            }
+        glossary.setOnClickListener(v -> {
+            Intent intent = new Intent(Homepage.this, Glossary.class);
+            startActivity(intent);
         });
 
     }

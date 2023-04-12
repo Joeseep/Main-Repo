@@ -1,5 +1,6 @@
 package com.example.lifesaver;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -101,9 +103,41 @@ public class Signup extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
-                                // Show a toast message if email already exists
-                                Toast.makeText(Signup.this, "There is already an existing account associated with this email address", Toast.LENGTH_SHORT).show();
-                            } else {
+                                // Show a dialog to the user to reset or add a password
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Signup.this);
+                                builder.setMessage("An account with this email already exists. Would you like to reset or add a password?")
+                                        .setCancelable(false)
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                // Send password reset email and show toast
+                                                mAuth.sendPasswordResetEmail(email)
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    Toast.makeText(Signup.this, "A password reset link has been sent to your email address", Toast.LENGTH_SHORT).show();
+                                                                } else {
+                                                                    Toast.makeText(Signup.this, "Failed to send password reset email", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                                // Return to main activity
+                                                                Intent intent = new Intent(Signup.this, MainActivity.class);
+                                                                startActivity(intent);
+                                                                finish();
+                                                            }
+                                                        });
+                                            }
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                // Do nothing and return to signup activity
+                                                dialog.cancel();
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            }
+                            else {
                                 // Create a new user account in Firebase Auth
                                 // Create a new user account in Firebase Auth
                                 mAuth.createUserWithEmailAndPassword(email, password)
