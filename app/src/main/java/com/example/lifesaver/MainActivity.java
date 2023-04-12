@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
                 // User is not logged in, show the login screen
-            Toast.makeText(MainActivity.this, "Please log in to continue.", Toast.LENGTH_LONG).show();
+            Log.d(TAG, "User is not logged in");
         }
 
 

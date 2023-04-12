@@ -206,8 +206,10 @@ public class Profile extends AppCompatActivity {
         updateData.put("address", address);
         updateData.put("phoneNumber", phone);
         mDatabaseReference.updateChildren(updateData)
+                .addOnSuccessListener(aVoid ->Toast.makeText(Profile.this, "Profile data updated successfully",Toast.LENGTH_SHORT).show())
                 .addOnSuccessListener(aVoid -> Log.d("Profile", "Profile data updated successfully"))
-                .addOnFailureListener(e -> Log.e("Profile", "Error updating profile data", e));
+                .addOnFailureListener(e -> Log.e("Profile", "Error updating profile data", e))
+                .addOnFailureListener(e -> Toast.makeText(Profile.this, "Error updating profile data", Toast.LENGTH_SHORT).show());
     }
 
     // Handle result of choose profile image intent
@@ -229,8 +231,10 @@ public class Profile extends AppCompatActivity {
                     profileImageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                         // Update profile picture URL in Firebase database
                         mDatabaseReference.child("profilePictureUrl").setValue(uri.toString())
+                                .addOnSuccessListener(aVoid ->Toast.makeText(Profile.this, "Profile picture uploaded successfully",Toast.LENGTH_SHORT).show())
                                 .addOnSuccessListener(aVoid -> Log.d("Profile", "Profile picture URL updated successfully"))
-                                .addOnFailureListener(e -> Log.e("Profile", "Error updating profile picture URL", e));
+                                .addOnFailureListener(e -> Log.e("Profile", "Error updating profile picture URL", e))
+                                .addOnFailureListener(e -> Toast.makeText(Profile.this, "Error uploading profile picture", Toast.LENGTH_SHORT).show());
                     });
                 })
                 .addOnFailureListener(e -> Log.e("Profile", "Error uploading profile image", e));
