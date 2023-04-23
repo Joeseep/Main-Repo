@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <!-- Foundation name header -->
+    <TextView
+        android:id="@+id/foundation_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Foundation Name"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Foundation logo image -->
+    <ImageView
+        android:id="@+id/foundation_logo"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center|top"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+      />
+
+    <!-- Foundation address -->
+    <TextView
+        android:id="@+id/foundation_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:drawableLeft="@drawable/ic_location"
+        android:text="Foundation Address"
+        android:textSize="16sp" />
+
+        <!-- Foundation website -->
+        <TextView
+            android:id="@+id/foundation_website"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:drawableLeft="@drawable/ic_web"
+            android:text="Foundation Website"
+            android:textSize="16sp" />
+
+    <!-- Foundation email -->
+    <TextView
+        android:id="@+id/foundation_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:drawableLeft="@drawable/ic_email"
+        android:text="Foundation Email"
+        android:textSize="16sp" />
+
+    <!-- Foundation contact number -->
+    <TextView
+        android:id="@+id/foundation_contact_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:drawableLeft="@drawable/ic_contact"
+        android:text="Foundation Contact Number"
+        android:textSize="16sp" />
+
+    <!-- Foundation goal header -->
+    <TextView
+        android:id="@+id/foundation_goal_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Goal"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Foundation goal content -->
+    <TextView
+        android:id="@+id/foundation_goal_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Foundation goal content goes here"
+        android:textSize="16sp" />
+    </LinearLayout>
+
+</ScrollView>

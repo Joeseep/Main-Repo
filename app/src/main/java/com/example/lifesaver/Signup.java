@@ -103,6 +103,7 @@ public class Signup extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
+                                mEmail.setError("Email already exists");
                                 // Show a dialog to the user to reset or add a password
                                 AlertDialog.Builder builder = new AlertDialog.Builder(Signup.this);
                                 builder.setMessage("An account with this email already exists. Would you like to reset or add a password?")
@@ -138,8 +139,6 @@ public class Signup extends AppCompatActivity {
                                 alert.show();
                             }
                             else {
-                                // Create a new user account in Firebase Auth
-                                // Create a new user account in Firebase Auth
                                 mAuth.createUserWithEmailAndPassword(email, password)
                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override

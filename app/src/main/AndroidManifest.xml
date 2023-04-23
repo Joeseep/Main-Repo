@@ -13,8 +13,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
-
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,6 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LifeSaver"
         tools:ignore="ExtraText">
+        <activity
+            android:name=".FoundationPage"
+            android:exported="false" />
+        <activity
+            android:name=".Volunteer"
+            android:exported="false" />
         <activity
             android:name=".Report"
             android:exported="false" />
@@ -124,7 +128,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
