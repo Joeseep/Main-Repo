@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Selected Topic"
-            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
         <LinearLayout
@@ -81,6 +80,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="40dp"
         android:text="A"
+        android:textColor="#CC000000"
         android:background="@drawable/optionbackground"/>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/optionb"
@@ -90,6 +90,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="40dp"
         android:text="B"
+        android:textColor="#CC000000"
         android:background="@drawable/optionbackground"/>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/optionc"
@@ -99,6 +100,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="40dp"
         android:text="C"
+        android:textColor="#CC000000"
         android:background="@drawable/optionbackground"/>
 
     <androidx.appcompat.widget.AppCompatButton

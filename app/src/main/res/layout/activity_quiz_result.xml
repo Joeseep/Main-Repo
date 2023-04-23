@@ -23,7 +23,6 @@
         android:layout_below="@id/congrats"
         android:gravity="center"
         android:text="You've successfully completed the quiz!"
-        android:textColor="@color/black"
         android:textStyle="bold"/>
 
     <LinearLayout
@@ -38,7 +37,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/score1"
             android:text="Total Score"
-            android:textColor="@color/black"
             android:textStyle="bold"/>
         <TextView
             android:layout_width="wrap_content"
@@ -46,7 +44,6 @@
             android:id="@+id/score"
             android:text="0"
             android:layout_gravity="center"
-            android:textColor="@color/black"
             android:textStyle="bold"/>
     </LinearLayout>
 

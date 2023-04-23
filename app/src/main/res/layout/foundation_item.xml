@@ -41,7 +41,7 @@
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@id/foundation_image"
             android:textSize="14sp"
-            android:maxLines="0"/>
+            android:layout_below="@id/foundation_name"/>
         <TextView
             android:id="@+id/foundation_address"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@id/foundation_image"
             android:textSize="12sp"
-            android:layout_below="@id/foundation_email"/>
+            android:maxLines="0"/>
 
         <TextView
             android:id="@+id/foundation_email"
@@ -70,7 +70,7 @@
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@id/foundation_image"
             android:textSize="12sp"
-            android:layout_below="@id/foundation_website"/>
+            android:maxLines="0"/>
 
         <TextView
             android:id="@+id/foundation_website"
@@ -80,7 +80,7 @@
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@id/foundation_image"
             android:textSize="12sp"
-            android:layout_below="@id/foundation_name"/>
+            android:maxLines="0"/>
 
 
     </RelativeLayout>

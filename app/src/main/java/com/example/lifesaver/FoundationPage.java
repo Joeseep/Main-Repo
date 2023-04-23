@@ -4,6 +4,7 @@ package com.example.lifesaver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -76,11 +77,12 @@ public class FoundationPage extends AppCompatActivity {
 
                     // Set foundation data to views
                     foundationName.setText(foundationNameString);
-                    foundationAddress.setText(foundationAddressString);
-                    foundationEmail.setText(foundationEmailString);
-                    foundationContactNumber.setText(foundationContactNumberString);
+                    foundationAddress.setText(Html.fromHtml("<b>Address:</b><br>" + foundationAddressString));
+                    foundationEmail.setText(Html.fromHtml("<b>Email Address:</b><br/>" + foundationEmailString));
+                    foundationContactNumber.setText(Html.fromHtml("<b>Contact Number:</b><br/>" + foundationContactNumberString));
+                    foundationWebsite.setText(Html.fromHtml("<b>Website:</b><br/>" + foundationWebsiteString));
                     foundationGoalContent.setText(foundationGoalContentString);
-                    foundationWebsite.setText(foundationWebsiteString);
+
 
                     // Load foundation logo from URL using Picasso library
                     if (foundationLogoString != null && !foundationLogoString.isEmpty()) {
@@ -134,7 +136,7 @@ public class FoundationPage extends AppCompatActivity {
                                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                 startActivity(intent);
                             }else{
-                                Toast.makeText(FoundationPage.this, "Invalid Url", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(FoundationPage.this, "Invalid or Unavailable URL", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

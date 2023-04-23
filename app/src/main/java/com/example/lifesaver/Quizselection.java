@@ -3,6 +3,7 @@ package com.example.lifesaver;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 public class Quizselection extends AppCompatActivity {
     LinearLayout diseaseselect, aidselect;
     private String selectedtopic = "";
-    TextView startquiz;
+    TextView startquiz, diseasetxt, aidtxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,8 @@ public class Quizselection extends AppCompatActivity {
         diseaseselect = findViewById(R.id.diseaseselect);
         aidselect = findViewById(R.id.aidselect);
         startquiz = findViewById(R.id.startquiz);
+        diseasetxt = findViewById(R.id.diseasetxt);
+        aidtxt = findViewById(R.id.aidtxt);
 
         diseaseselect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +32,8 @@ public class Quizselection extends AppCompatActivity {
                 selectedtopic = "Disease";
 
                 diseaseselect.setBackgroundResource(R.drawable.whitestroke);
-
+                diseasetxt.setTextColor(Color.BLACK);
+                aidtxt.setTextColor(Color.BLACK);
                 aidselect.setBackgroundResource(R.drawable.white10);
             }
         });
@@ -40,7 +44,8 @@ public class Quizselection extends AppCompatActivity {
                 selectedtopic = "First Aid";
 
                 aidselect.setBackgroundResource(R.drawable.whitestroke);
-
+                diseasetxt.setTextColor(Color.BLACK);
+                aidtxt.setTextColor(Color.BLACK);
                 diseaseselect.setBackgroundResource(R.drawable.white10);
             }
         });

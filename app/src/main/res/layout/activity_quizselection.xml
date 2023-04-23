@@ -27,7 +27,6 @@
         android:layout_below="@id/quizimage"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="20dp"
-        android:textColor="@color/black"
         android:text="Choose Topic"/>
 
     <LinearLayout
@@ -55,11 +54,11 @@
                 android:layout_height="80dp"
                 android:src="@drawable/ic_disease"/>
             <TextView
+                android:id="@+id/diseasetxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Diseases"
-                android:textColor="#CC000000"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 />
@@ -80,11 +79,11 @@
                 android:layout_height="80dp"
                 android:src="@drawable/ic_tips"/>
             <TextView
+                android:id="@+id/aidtxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="First Aid"
-                android:textColor="#CC000000"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
         </LinearLayout>
@@ -101,7 +100,6 @@
         android:layout_marginEnd="20dp"
         android:gravity="center"
         android:textStyle="bold"
-        android:textColor="#CC000000"
         android:textSize="20dp"
         android:text="Start Quiz" />
 
