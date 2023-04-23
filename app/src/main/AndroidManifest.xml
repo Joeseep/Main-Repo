@@ -22,6 +22,15 @@
         android:theme="@style/Theme.LifeSaver"
         tools:ignore="ExtraText">
         <activity
+            android:name=".Quizactivity"
+            android:exported="false"/>
+        <activity
+            android:name=".QuizResult"
+            android:exported="false" />
+        <activity
+            android:name=".Quizselection"
+            android:exported="false" />
+        <activity
             android:name=".FoundationPage"
             android:exported="false" />
         <activity

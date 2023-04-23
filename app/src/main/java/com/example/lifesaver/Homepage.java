@@ -16,7 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Homepage extends AppCompatActivity {
-    LinearLayout diseaselayout, homepagelogout, tipslayout, directorylayout, profile, glossary, volunteer;
+    LinearLayout diseaselayout, homepagelogout, tipslayout, directorylayout, profile, glossary, volunteer, quiz;
     @Override
     public void onBackPressed() {
         recreate();
@@ -35,6 +35,7 @@ public class Homepage extends AppCompatActivity {
         profile = findViewById(R.id.profile);
         glossary = findViewById(R.id.glossary);
         volunteer = findViewById(R.id.volunteer);
+        quiz = findViewById(R.id.quiz);
 
 
         //para padung sa mga disease
@@ -68,6 +69,11 @@ public class Homepage extends AppCompatActivity {
         });
         volunteer.setOnClickListener(v -> {
             Intent intent = new Intent(Homepage.this, Volunteer.class);
+            startActivity(intent);
+        });
+
+        quiz.setOnClickListener(view -> {
+            Intent intent = new Intent(Homepage.this, Quizselection.class);
             startActivity(intent);
         });
 
