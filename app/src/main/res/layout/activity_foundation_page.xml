@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Foundation Name"
+        android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />
 
