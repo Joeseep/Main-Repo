@@ -45,6 +45,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipViewHolder> {
         holder.title.setText(TipClassList.get(position).getTitle());
         holder.description.setText(TipClassList.get(position).getDescription());
         holder.tipvideo.setVideoPath(TipClassList.get(position).getVideoTIP());
+        holder.tiprefer.setText(TipClassList.get(position).getTipreference());
         holder.tipvideo.start();
 
         holder.tipitems.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +56,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipViewHolder> {
                 intent.putExtra("Description", TipClassList.get(holder.getAdapterPosition()).getDescription());
                 intent.putExtra("Title", TipClassList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("TipVideo", TipClassList.get(holder.getAdapterPosition()).getVideoTIP());
+                intent.putExtra("Tipreference", TipClassList.get(holder.getAdapterPosition()).getTipreference());
                 context.startActivity(intent);
             }
         });
@@ -68,7 +70,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipViewHolder> {
 
 class TipViewHolder extends RecyclerView.ViewHolder {
     ImageView image;
-    TextView title, description;
+    TextView title, description, tiprefer;
     CardView tipitems;
 
     VideoView tipvideo;
@@ -81,6 +83,7 @@ class TipViewHolder extends RecyclerView.ViewHolder {
         title = itemView.findViewById(R.id.title);
         tipitems = itemView.findViewById(R.id.tipitems);
         tipvideo = itemView.findViewById(R.id.tipvideo);
+        tiprefer = itemView.findViewById(R.id.tiprefer);
 
     }
 }

@@ -27,7 +27,7 @@
             android:layout_marginEnd="10dp"
             android:gravity="center"
             android:orientation="horizontal">
-            <ImageView
+            <!--<ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="15dp"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="00:59"
-                />
+                />-->
         </LinearLayout>
 
 

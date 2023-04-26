@@ -1,7 +1,15 @@
 package com.example.lifesaver;
 
 public class TipClass {
-    private String title, description, image, videoTIP;
+    private String title, description, image, videoTIP, tipreference;
+
+    public String getTipreference() {
+        return tipreference;
+    }
+
+    public void setTipreference(String tipreference) {
+        this.tipreference = tipreference;
+    }
 
     public String getTitle() {
         return title;
@@ -36,11 +44,12 @@ public class TipClass {
     }
 
 
-    public TipClass(String title, String description, String image, String videoTIP) {
+    public TipClass(String title, String description, String image, String videoTIP, String tipreference) {
         this.title = title;
         this.description = description;
         this.image = image;
         this.videoTIP = videoTIP;
+        this.tipreference = tipreference;
     }
     public TipClass(){
 

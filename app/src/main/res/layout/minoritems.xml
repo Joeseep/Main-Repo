@@ -83,6 +83,15 @@
             android:layout_toEndOf="@id/imageid"
             android:layout_below="@id/minorname"
             android:maxLines="0"/>
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="12dp"
+            android:id="@+id/refer"
+            android:textSize="8sp"
+            android:layout_toEndOf="@id/imageid"
+            android:layout_below="@id/minorname"
+            android:maxLines="0"/>
     </RelativeLayout>
 
 

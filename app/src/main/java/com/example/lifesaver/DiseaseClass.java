@@ -1,7 +1,15 @@
 package com.example.lifesaver;
 
 public class DiseaseClass {
-    private String name, description, imageURL, cause, symptoms, firstaid, prevention, videoURL;
+    private String name, description, imageURL, cause, symptoms, firstaid, prevention, videoURL, reference;
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
 
     public String getVideoURL() {
         return videoURL;
@@ -67,7 +75,7 @@ public class DiseaseClass {
         this.imageURL = imageURL;
     }
 
-    public DiseaseClass(String name, String description, String imageURL, String cause, String symptoms, String firstaid, String prevention, String videoURL) {
+    public DiseaseClass(String name, String description, String imageURL, String cause, String symptoms, String firstaid, String prevention, String videoURL, String reference) {
         this.name = name;
         this.description = description;
         this.imageURL = imageURL;
@@ -76,6 +84,7 @@ public class DiseaseClass {
         this.firstaid = firstaid;
         this.prevention = prevention;
         this.videoURL = videoURL;
+        this.reference = reference;
     }
     public DiseaseClass(){
 

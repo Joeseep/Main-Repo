@@ -27,7 +27,7 @@ public class Quizactivity extends AppCompatActivity {
     AppCompatButton optiona, optionb, optionc, nextbutton;
 
     Timer quiztimer;
-    int totaltimemins = 1;
+    int totaltimemins = 0;
     int seconds = 0;
     List<Questionclass> questionlist;
     int currentquestionposition = 0;
@@ -36,7 +36,7 @@ public class Quizactivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizactivity);
-        timer = findViewById(R.id.timer);
+        //timer = findViewById(R.id.timer);
         topicname = findViewById(R.id.topicname);
         qcount = findViewById(R.id.qcount);
         question = findViewById(R.id.question);
@@ -50,7 +50,7 @@ public class Quizactivity extends AppCompatActivity {
         topicname.setText(gettopic);
 
         questionlist = QuestionBank.getquestions(gettopic);
-        timer(timer);
+        //timer(timer);
 
         qcount.setText((currentquestionposition+1)+"/"+questionlist.size());
         question.setText(questionlist.get(0).getQuestion());
@@ -147,20 +147,18 @@ public class Quizactivity extends AppCompatActivity {
             finish();
         }
     }
-    private void timer(TextView timer){
+    /*private void timer(TextView timer){
         quiztimer = new Timer();
         quiztimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if(seconds==0){
-                    totaltimemins--;
                     seconds=59;
                 }
                 else if(seconds==0 && totaltimemins==0){
                     quiztimer.purge();
                     quiztimer.cancel();
 
-                    Toast.makeText(Quizactivity.this, "Time's up", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Quizactivity.this, QuizResult.class);
                     intent.putExtra("correct", getcorrectanswers());
                     intent.putExtra("incorrect", getincorrectanswers());
@@ -173,6 +171,7 @@ public class Quizactivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        //Toast.makeText(Quizactivity.this, "Time's up", Toast.LENGTH_SHORT).show();
                         String finalminutes = String.valueOf(totaltimemins);
                         String finalseconds = String.valueOf(seconds);
 
@@ -187,7 +186,7 @@ public class Quizactivity extends AppCompatActivity {
                 });
             }
         },1000, 1000);
-    }
+    }*/
 
     private int getcorrectanswers(){
         int correctanswers = 0;
@@ -203,16 +202,16 @@ public class Quizactivity extends AppCompatActivity {
     }
 
     private int getincorrectanswers(){
-        int correctanswers = 0;
+        int incorrectanswers = 0;
         for(int i=0;i<questionlist.size();i++){
             String getselectedanswer = questionlist.get(i).getSelectedanswer();
             String getanswer = questionlist.get(i).getAnswer();
 
             if(!getselectedanswer.equals(getanswer)){
-                correctanswers++;
+                incorrectanswers++;
             }
         }
-        return correctanswers;
+        return incorrectanswers;
     }
 
     @Override
@@ -220,7 +219,7 @@ public class Quizactivity extends AppCompatActivity {
         quiztimer.purge();
         quiztimer.cancel();
 
-        startActivity(new Intent(Quizactivity.this, Quizselection.class));
+        startActivity(new Intent(Quizactivity.this, Homepage.class));
     }
 
     private void revealanswer(){

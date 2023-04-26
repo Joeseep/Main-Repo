@@ -48,6 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.symp.setText(diseaseClassList.get(position).getSymptoms());
         holder.aid.setText(diseaseClassList.get(position).getFirstaid());
         holder.prevent.setText(diseaseClassList.get(position).getFirstaid());
+        holder.refer.setText(diseaseClassList.get(position).getReference());
         holder.video.setVideoPath(diseaseClassList.get(position).getVideoURL());
         holder.video.start();
 
@@ -63,6 +64,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("Symptom", diseaseClassList.get(holder.getAdapterPosition()).getSymptoms());
                 intent.putExtra("Firstaid", diseaseClassList.get(holder.getAdapterPosition()).getFirstaid());
                 intent.putExtra("Prevention", diseaseClassList.get(holder.getAdapterPosition()).getPrevention());
+                intent.putExtra("Reference", diseaseClassList.get(holder.getAdapterPosition()).getReference());
                 intent.putExtra("Video", diseaseClassList.get(holder.getAdapterPosition()).getVideoURL());
                 context.startActivity(intent);
             }
@@ -76,7 +78,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 }
 class MyViewHolder extends RecyclerView.ViewHolder{
     ImageView imageid;
-    TextView minorname, desc, cau, symp, aid, prevent;
+    TextView minorname, desc, cau, symp, aid, prevent, refer;
     CardView minoritems;
     VideoView video;
 
@@ -93,5 +95,7 @@ class MyViewHolder extends RecyclerView.ViewHolder{
         aid = itemView.findViewById(R.id.aid);
         prevent = itemView.findViewById(R.id.prevent);
         video = itemView.findViewById(R.id.video);
+        refer = itemView.findViewById(R.id.refer);
+
     }
 }

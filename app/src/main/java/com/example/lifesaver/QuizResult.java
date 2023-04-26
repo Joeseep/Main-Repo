@@ -23,7 +23,7 @@ public class QuizResult extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(QuizResult.this, Quizselection.class));
+        startActivity(new Intent(QuizResult.this, Homepage.class));
         finish();
     }
 }

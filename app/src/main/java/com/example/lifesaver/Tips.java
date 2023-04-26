@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Tips extends AppCompatActivity {
     DatabaseReference databaseReference;
-    TextView des, title;
+    TextView des, title, tipreferred;
     ImageView image;
     VideoView videotip;
     @Override
@@ -30,6 +30,7 @@ public class Tips extends AppCompatActivity {
         title = findViewById(R.id.tip_title);
         image = findViewById(R.id.tip_image);
         videotip = findViewById(R.id.videotip);
+        tipreferred = findViewById(R.id.tipreferred);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
@@ -41,6 +42,11 @@ public class Tips extends AppCompatActivity {
 
             title.setText(bundle.getString("Title"));
             Glide.with(this).load(bundle.getString("Image")).into(image);
+
+            String tipsrefer = bundle.getString("Tipreference");
+            String[] tipsreferarray = tipsrefer.split("\\*");
+            tipsrefer = TextUtils.join("\n", tipsreferarray).trim();
+            tipreferred.setText(tipsrefer);
 
             String videoTIP = bundle.getString("TipVideo");
             if(!TextUtils.isEmpty(videoTIP)){
