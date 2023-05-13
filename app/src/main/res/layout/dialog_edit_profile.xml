@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/edit_dialog"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Profile"
+        android:text="Edit Profile Information"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp"/>
 
@@ -36,6 +39,74 @@
         android:layout_marginTop="10dp"
         android:hint="Phone"
         android:minHeight="48dp" />
+    <EditText
+        android:id="@+id/edit_dob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Date of Birth (MM/DD/YYYY)"
+        android:minHeight="48dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
+
+    <EditText
+        android:id="@+id/edit_blood_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Blood Type"
+        android:minHeight="48dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
+
+    <EditText
+        android:id="@+id/edit_allergies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Allergies and Sensitivities to Medications"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/edit_medications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Current Medications and Dosages"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/edit_conditions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Chronic Medical Conditions"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/edit_procedures"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Previous Surgeries or Medical Procedures"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/edit_emergency_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Emergency Contact Information"
+        android:minHeight="48dp" />
+    <EditText
+        android:id="@+id/edit_insurance_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Insurance Information"
+        android:minHeight="48dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_button"
@@ -45,10 +116,13 @@
         android:background="#00D100"
         android:text="Save" />
 
+
     <Button
         android:id="@+id/cancel_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cancel" />
+ </LinearLayout>
+</ScrollView>
 
-</LinearLayout>
+
