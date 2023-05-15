@@ -2,29 +2,18 @@ package com.example.lifesaver;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,9 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Homepage extends AppCompatActivity {
     LinearLayout diseaselayout, homepagelogout, tipslayout, directorylayout, profile, glossary, volunteer, quiz;
-    WindowManager windowManager;
-    View floatingWidget;
-    WindowManager.LayoutParams floatingWidgetParams;
+
 
     @Override
     public void onBackPressed() {
@@ -106,117 +93,13 @@ public class Homepage extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (floatingWidget != null && windowManager != null) {
-            windowManager.removeView(floatingWidget);
-            floatingWidget = null;
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (floatingWidget != null && windowManager != null) {
-            windowManager.removeView(floatingWidget);
-            floatingWidget = null;
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Create the floating widget
-        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-        floatingWidget = LayoutInflater.from(this).inflate(R.layout.floating_widget, null);
-        ImageView floatingWidgetIcon = floatingWidget.findViewById(R.id.floating_widget_icon);
-
-        // Set up gesture detector for long press
-        final GestureDetector gestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
-            @Override
-            public void onLongPress(MotionEvent event) {
-                initialX = floatingWidgetParams.x;
-                initialY = floatingWidgetParams.y;
-                initialTouchX = event.getRawX();
-                initialTouchY = event.getRawY();
-            }
-
-            @Override
-            public boolean onSingleTapConfirmed(MotionEvent event) {
-                showLocationSharingDialog();
-                floatingWidget.setVisibility(View.GONE);
-                return true;
-            }
-        });
-
-        // Set up touch listener for drag and drop
-        floatingWidgetIcon.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (gestureDetector.onTouchEvent(event)) {
-                    return true;
-                }
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        initialX = floatingWidgetParams.x;
-                        initialY = floatingWidgetParams.y;
-                        initialTouchX = event.getRawX();
-                        initialTouchY = event.getRawY();
-                        return true;
-                    case MotionEvent.ACTION_MOVE:
-                        floatingWidgetParams.x = initialX + (int) (event.getRawX() - initialTouchX);
-                        floatingWidgetParams.y = initialY - (int) (event.getRawY() - initialTouchY);
-                        windowManager.updateViewLayout(floatingWidget, floatingWidgetParams);
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putInt("widgetX", floatingWidgetParams.x);
-                        editor.putInt("widgetY", floatingWidgetParams.y);
-                        editor.apply();
-                        if (Math.abs(event.getRawX() - initialTouchX) < 5 && Math.abs(event.getRawY() - initialTouchY) < 5) {
-                            showLocationSharingDialog();
-                            floatingWidget.setVisibility(View.INVISIBLE);
-                        }
-                        return true;
-                }
-                return false;
-            }
-        });
-
-        // Set up layout parameters for the floating widget
-        floatingWidgetParams = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                PixelFormat.TRANSLUCENT);
-
-        // Load saved widget position, or set default position
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        floatingWidgetParams.x = preferences.getInt("widgetX", 0);
-        floatingWidgetParams.y = preferences.getInt("widgetY", 200);
-
-        floatingWidgetParams.gravity = Gravity.CENTER_VERTICAL | Gravity.BOTTOM;
-        windowManager.addView(floatingWidget, floatingWidgetParams);
-    }
-
-    private int initialX, initialY;
-    private float initialTouchX, initialTouchY;
-
-
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -233,14 +116,8 @@ public class Homepage extends AppCompatActivity {
             Intent intent = new Intent(this, Report.class);
             startActivity(intent);
             return true;
-        } else if (item.getItemId() == R.id.quick_location){
-            if (isFloatingWidgetVisible()) {
-                floatingWidget.setVisibility(View.GONE);
-                item.setTitle("Show Quick Location");
-            } else {
-                floatingWidget.setVisibility(View.VISIBLE);
-                item.setTitle("Hide Quick Location");
-            }
+        }else if (item.getItemId() == R.id.quick_location) {
+            showLocationSharingDialog();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -254,45 +131,18 @@ public class Homepage extends AppCompatActivity {
         builder.setPositiveButton("I need help. I am in an emergency.", (dialog, which) -> {
             // Share the location with the "I need help" message
             shareLocation("I need help. I am in an emergency.");
-            dialog.dismiss();
         });
         builder.setNegativeButton("Send help there is an emergency in my location", (dialog, which) -> {
             // Share the location with the "Send help" message
             shareLocation("Send help there is an emergency in my location");
+        });
+        builder.setNeutralButton("Cancel", (dialog,which)->{
             dialog.dismiss();
         });
         AlertDialog dialog = builder.create();
-        dialog.setOnDismissListener(dialog1 -> {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            View currentFocus = getWindow().getCurrentFocus();
-            if (currentFocus != null) {
-                imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
-            }
-            dialog1.dismiss();
-            dialog.dismiss();
-            floatingWidget.setVisibility(View.VISIBLE);
-        });
-        dialog.setOnKeyListener((dialog12, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                dialog.dismiss();
-                dialog12.dismiss();
-                return true;
-            }
-            return false;
-        });
-
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            dialog.show();
-            floatingWidget.setVisibility(View.GONE);
-        }, 200); // adjust delay time as needed
+        dialog.show();
     }
 
-
-
-    private boolean isFloatingWidgetVisible() {
-        return floatingWidget != null && floatingWidget.isShown();
-    }
 
     private void shareLocation(String message) {
         // Get the user's current location
@@ -321,12 +171,10 @@ public class Homepage extends AppCompatActivity {
                         shareIntent.setType("text/plain");
                         shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                         startActivity(Intent.createChooser(shareIntent, "Share your location"));
-                        floatingWidget.setVisibility(View.GONE);
 
                     } else {
                         // Location is null, handle the error
-                        Toast.makeText(this, "Unable to get current location", Toast.LENGTH_SHORT).show();
-                        floatingWidget.setVisibility(View.GONE);
+                        Toast.makeText(this, "Unable to get current location. Make sure location is turned on.", Toast.LENGTH_SHORT).show();
                     }
                 });
 

@@ -3,17 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/quick_location"
-        android:title="Hide Quick Location" />
+        android:title="Show Quick Location"
+        android:icon="@drawable/ic_gps"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/report"
-        android:title="Send Feedback" />
+        android:title="Send Feedback"
+        android:icon="@drawable/ic_feedback"/>
+
 
     <item
         android:id="@+id/privacy"
-        android:title="Privacy Policy" />
+        android:title="Privacy Policy"
+        android:icon="@drawable/ic_privacy"/>
+
     <item
         android:id="@+id/about"
-        android:title="About LifeSaver" />
+        android:title="About LifeSaver"
+        android:icon="@drawable/ic_about"/>
 
 
 </menu>
