@@ -59,12 +59,19 @@ public class Homepage extends AppCompatActivity {
         });
         //para sa logout
         homepagelogout.setOnClickListener(view -> {
-            FirebaseAuth.getInstance().signOut();
-            LoginManager.getInstance().logOut();
-            GoogleSignIn.getClient(Homepage.this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
-            Intent intent = new Intent(Homepage.this, MainActivity.class);
-            startActivity(intent);
+            AlertDialog.Builder builder = new AlertDialog.Builder(Homepage.this);
+            builder.setMessage("Are you sure you want to log out?");
+            builder.setPositiveButton("Yes", (dialog, which) -> {
+                FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
+                GoogleSignIn.getClient(Homepage.this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
+                Intent intent = new Intent(Homepage.this, MainActivity.class);
+                startActivity(intent);
+            });
+            builder.setNegativeButton("Cancel", null);
+            builder.show();
         });
+
         tipslayout.setOnClickListener(view -> {
             Intent intent = new Intent(Homepage.this, SelectTip.class);
             startActivity(intent);

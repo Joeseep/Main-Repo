@@ -30,7 +30,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LifeSaver"
+        android:theme="@style/Theme.AppCompat.DayNight"
         tools:ignore="ExtraText">
 
         <activity
@@ -115,13 +115,17 @@
             android:enabled="true"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:windowSoftInputMode="adjustResize">
 
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <!-- Facebook Login -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
