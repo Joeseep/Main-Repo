@@ -128,13 +128,13 @@ public class Homepage extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Share Location");
         builder.setMessage("Select the message you want to send:");
-        builder.setPositiveButton("I need help. I am in an emergency.", (dialog, which) -> {
+        builder.setPositiveButton("I need help! I am in an emergency.", (dialog, which) -> {
             // Share the location with the "I need help" message
-            shareLocation("I need help. I am in an emergency.");
+            shareLocation("I need help! I am in an emergency.");
         });
-        builder.setNegativeButton("Send help there is an emergency in my location", (dialog, which) -> {
+        builder.setNegativeButton("Send help! there is an emergency in my location", (dialog, which) -> {
             // Share the location with the "Send help" message
-            shareLocation("Send help there is an emergency in my location");
+            shareLocation("Send help! there is an emergency in my location");
         });
         builder.setNeutralButton("Cancel", (dialog,which)->{
             dialog.dismiss();
